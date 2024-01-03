@@ -107,7 +107,7 @@ Some settings can be changed in `./src/main/resources/synthea.properties`.
 Synthea<sup>TM</sup> will output patient records in C-CDA and FHIR formats in `./output`.
 
 
-### POST/Upload Synthetic Patients to FHIR server
+## POST/Upload Synthetic Patients to FHIR server
 The root directory also contains a file called post_fhir.sh. This file gets pushed to the container during the build and can be invoked using the below command. 
 ```
 docker [container_name] exec ./post_fhir.sh
