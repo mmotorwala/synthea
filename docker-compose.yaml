@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  synthea:
+    image: synthea:latest
+    build: .
+    volumes:
+      - /Users/murtuza/Documents/Home/synthea/fhir:/usr/src/synthea/output/fhir
+    command: "tail -f /dev/null"
