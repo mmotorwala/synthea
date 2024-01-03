@@ -106,6 +106,8 @@ run_synthea --exporter.baseDirectory="./output_tx/" Texas
 Some settings can be changed in `./src/main/resources/synthea.properties`.
 Synthea<sup>TM</sup> will output patient records in C-CDA and FHIR formats in `./output`.
 
+![image](https://github.com/mmotorwala/synthea/assets/111542130/1c30a8bf-6dae-40cd-b7ab-3893aae823fd)
+
 
 ## POST/Upload Synthetic Patients to FHIR server
 The root directory also contains a file called post_fhir.sh. This file gets pushed to the container during the build and can be invoked using the below command. 
@@ -114,6 +116,8 @@ docker [container_name] exec ./post_fhir.sh
 ```
 The settings in the file assumes that you are running fhir server on localhost. Thus the varial 'URL' is set to URL="http://host.docker.internal:8000/" 
 Secondly, you will need to change the authorization header (-H 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=') to the login you have in your FHIR server. The default used admin:password which is base64 encoded.
+
+![image](https://github.com/mmotorwala/synthea/assets/111542130/ba84c950-d217-470d-968c-13ff91545273)
 
 
 # License
