@@ -1,6 +1,3 @@
-# synthea
-Downloads synthea from GitHub and creates a container to create synthetic FHIR bundles and push them to FHIR server
-
 # Synthea<sup>TM</sup> Patient Generator ![Build Status](https://github.com/synthetichealth/synthea/workflows/.github/workflows/ci-build-test.yml/badge.svg?branch=master) [![codecov](https://codecov.io/gh/synthetichealth/synthea/branch/master/graph/badge.svg)](https://codecov.io/gh/synthetichealth/synthea)
 
 Synthea<sup>TM</sup> is a Synthetic Patient Population Simulator. The goal is to output synthetic, realistic (but not real), patient data and associated health records in a variety of formats.
@@ -31,6 +28,26 @@ Synthea<sup>TM</sup> requires Java JDK 11 or newer. We strongly recommend using 
 
 <b>Docker</b> - You will need [Docker](https://docs.docker.com/engine/install/) and Docker-compose installed on your machine.
 
+### Creating Docker container
+Building the docker container
+```
+docker build -t synthea:latest .
+```
+
+Once the container is built you will be able to see the image in your local repository. You can run this to list all images - 
+```
+docker image list
+```
+
+### Initializing the container
+Now that the image is built, we can use the docker-compose.yaml to create an instance of this image, i.e. run the container. We will use -d flag to run the container in detached mode.
+```
+docker-compose up -d
+```
+The docker-compose.yaml also allows you to map the output folder from the container to your local system.
+You can change the path before the ':' as you would like.
+/Users/murtuza/Documents/Home/synthea/fhir:/usr/src/synthea/output/fhir
+
 
 ### Changing the default properties
 The default properties file values can be found at `src/main/resources/synthea.properties`.
@@ -41,19 +58,19 @@ for more details, or use our [guided customizer tool](https://synthetichealth.gi
 
 
 ### Generate Synthetic Patients
-Generating the population one at a time...
+Generating 100 patients
 ```
-./run_synthea
+docker [container_name] exec ./run_synthea -p 100
 ```
 
 Command-line arguments may be provided to specify a state, city, population size, or seed for randomization.
 ```
-run_synthea [-s seed] [-p populationSize] [state [city]]
+docker [container_name] exec ./run_synthea [-s seed] [-p populationSize] [state [city]]
 ```
 
 Full usage info can be printed by passing the `-h` option.
 ```
-$ ./run_synthea -h     
+$ docker [container_name] exec ./run_synthea -h     
 
 > Task :run
 Usage: run_synthea [options] [state [city]]
@@ -87,21 +104,16 @@ run_synthea --exporter.baseDirectory="./output_tx/" Texas
 ```
 
 Some settings can be changed in `./src/main/resources/synthea.properties`.
-
 Synthea<sup>TM</sup> will output patient records in C-CDA and FHIR formats in `./output`.
 
-### Synthea<sup>TM</sup> GraphViz
-Generate graphical visualizations of Synthea<sup>TM</sup> rules and modules.
-```
-./gradlew graphviz
-```
 
-### Concepts and Attributes
-Generate a list of concepts (used in the records) or attributes (variables on each patient).
+### POST/Upload Synthetic Patients to FHIR server
+The root directory also contains a file called post_fhir.sh. This file gets pushed to the container during the build and can be invoked using the below command. 
 ```
-./gradlew concepts
-./gradlew attributes
+docker [container_name] exec ./post_fhir.sh
 ```
+The settings in the file assumes that you are running fhir server on localhost. Thus the varial 'URL' is set to URL="http://host.docker.internal:8000/" 
+Secondly, you will need to change the authorization header (-H 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=') to the login you have in your FHIR server. The default used admin:password which is base64 encoded.
 
 # License
 
