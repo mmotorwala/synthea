@@ -21,7 +21,7 @@ Currently, Synthea<sup>TM</sup> features include:
 - Rendering Rules and Disease Modules with Graphviz
 
 
-### Installation
+## Installation
 
 **System Requirements:**
 Synthea<sup>TM</sup> requires Java JDK 11 or newer. We strongly recommend using a Long-Term Support (LTS) release of Java, 11 or 17, as issues may occur with more recent non-LTS versions. The dockerfile included uses JDK17 as default.
@@ -57,7 +57,7 @@ for more details, or use our [guided customizer tool](https://synthetichealth.gi
 
 
 
-### Generate Synthetic Patients
+## Generate Synthetic Patients
 Generating 100 patients
 ```
 docker [container_name] exec ./run_synthea -p 100
@@ -115,10 +115,10 @@ docker [container_name] exec ./post_fhir.sh
 The settings in the file assumes that you are running fhir server on localhost. Thus the varial 'URL' is set to URL="http://host.docker.internal:8000/" 
 Secondly, you will need to change the authorization header (-H 'Authorization: Basic YWRtaW46cGFzc3dvcmQ=') to the login you have in your FHIR server. The default used admin:password which is base64 encoded.
 
+
 # License
 
 Copyright 2017-2023 The MITRE Corporation
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
