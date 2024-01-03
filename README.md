@@ -1,3 +1,13 @@
+#TL;DR
+Building the docker container
+```
+docker build -t synthea:latest .
+docker-compose up -d
+docker [container_name] exec ./run_synthea -p 100
+docker [container_name] exec ./post_fhir.sh
+```
+
+
 # Synthea<sup>TM</sup> Patient Generator by Smile Digital Health ![Build Status](https://github.com/synthetichealth/synthea/workflows/.github/workflows/ci-build-test.yml/badge.svg?branch=master) [![codecov](https://codecov.io/gh/synthetichealth/synthea/branch/master/graph/badge.svg)](https://codecov.io/gh/synthetichealth/synthea)
 
 Synthea<sup>TM</sup> is a Synthetic Patient Population Simulator. The goal is to output synthetic, realistic (but not real), patient data and associated health records in a variety of formats.
