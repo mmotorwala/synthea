@@ -103,8 +103,10 @@ run_synthea -p 10 --exporter.fhir.export=true
 run_synthea --exporter.baseDirectory="./output_tx/" Texas
 ```
 
-Some settings can be changed in `./src/main/resources/synthea.properties`.
+Some settings can be changed in `./synthea/src/main/resources/synthea.properties`.
 Synthea<sup>TM</sup> will output patient records in C-CDA and FHIR formats in `./output`.
+
+Output - 
 
 ![image](https://github.com/mmotorwala/synthea/assets/111542130/1c30a8bf-6dae-40cd-b7ab-3893aae823fd)
 
@@ -117,6 +119,8 @@ docker [container_name] exec ./post_fhir.sh
 The settings in the file assumes that you are running fhir server on localhost. You will need to change these 2 variables if you intend to POST FHIR bundles to a remote server. 
 1. 'URL' is set to URL="http://host.docker.internal:8000/" -- which means the FHIR server is running on localhost. You may want to change it to something like - https://try.smilecdr.com/fhir-request based on your configuration.
 2. Change the 'creds' variable to the login you have in your FHIR server. The default used is admin:password which is base64 encoded.
+
+Output - 
 
 ![image](https://github.com/mmotorwala/synthea/assets/111542130/ba84c950-d217-470d-968c-13ff91545273)
 
